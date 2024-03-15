@@ -6,12 +6,12 @@ const validateInput = [
       if (!req.body.mobile && !req.body.email) {
           throw new Error('Mobile OR Email is required.');
       }
-      return true;s
+      return true;
   }),
-  body('campaign').notEmpty().withMessage('Campaign is required.'),
-  body('source').notEmpty().withMessage('Source is required.'),
-  body('channel').notEmpty().withMessage('Channel is required.'),
-  body('course').notEmpty().withMessage('Course is required.'),
+  // body('campaign').notEmpty().withMessage('Campaign is required.'),
+  // body('source').notEmpty().withMessage('Source is required.'),
+  // body('channel').notEmpty().withMessage('Channel is required.'),
+  // body('course').notEmpty().withMessage('Course is required.'),
 ];
 
   const handleValidationErrors = (req, res, next) => {
