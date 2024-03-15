@@ -1,6 +1,7 @@
 require("dotenv").config();
-require('./config/db');
+// require('./config/db');
 const express = require("express");
+const mongoose = require('mongoose');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const apiRoutes = require("./routes/apiRoutes");
@@ -16,7 +17,16 @@ app.use("/api", apiRoutes);
 app.use("/", (req,res,next) => {
     res.send("All Set!");
 });
-app.listen(PORT, () => {
 
-    console.log("Server is running on ", PORT);
+
+if (process.env.ENV === 'development')
+    mongoose.set('debug', true);
+    
+mongoose.connect(process.env.DB).then(() => {
+    console.log("Connected to mongodb! (Hopefully)");
+    app.listen(PORT, () => {
+        console.log("Server is running on ", PORT);
+    });
+}).catch(err => {
+    console.log(err);
 });
